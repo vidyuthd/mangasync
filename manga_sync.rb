@@ -4,8 +4,11 @@ HTTP_URL_SEPERATOR = "/"
 
 class MangaSync
 
-  def method(series_name, start_chapter)
+  def method(series_name, start_chapter, end_chapter)
     local_start_chapter = start_chapter.clone
+    if local_start_chapter.to_i > end_chapter.to_i
+      return
+    end
     page=1
     series_dir = File.join(File.absolute_path(''), (series_name.to_s))
     chapter_dir = File.join(File.absolute_path(''), (series_name.to_s), (local_start_chapter.to_s))
@@ -49,12 +52,12 @@ class MangaSync
 
     while start_chapter.to_i <= end_chapter.to_i
       if start_chapter==start
-        t1 = Thread.new(series_name, start_chapter) { method(series_name, start_chapter) }
+        t1 = Thread.new(series_name, start_chapter, end_chapter) { method(series_name, start_chapter, end_chapter) }
       else
-        t1 = Thread.new(series_name, start_chapter) { method(series_name, (start_chapter.next!)) }
+        t1 = Thread.new(series_name, start_chapter, end_chapter) { method(series_name, (start_chapter.next!), end_chapter) }
       end
-      t2 = Thread.new(series_name, start_chapter) { method(series_name, (start_chapter.next!)) }
-      t3 = Thread.new(series_name, start_chapter) { method(series_name, (start_chapter.next!)) }
+      t2 = Thread.new(series_name, start_chapter, end_chapter) { method(series_name, (start_chapter.next!), end_chapter) }
+      t3 = Thread.new(series_name, start_chapter, end_chapter) { method(series_name, (start_chapter.next!), end_chapter) }
       t1.join
       t2.join
       t3.join
