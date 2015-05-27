@@ -6,9 +6,11 @@ class MangaSync
 
   def method(series_name, start_chapter, end_chapter)
     local_start_chapter = start_chapter.clone
+
     if local_start_chapter.to_i > end_chapter.to_i
       return
     end
+
     page=1
     series_dir = File.join(File.absolute_path(''), (series_name.to_s))
     chapter_dir = File.join(File.absolute_path(''), (series_name.to_s), (local_start_chapter.to_s))
@@ -18,11 +20,11 @@ class MangaSync
     if (!Dir.exist?(chapter_dir))
       Dir.mkdir(chapter_dir, 0755)
     end
-    while File.exist?(File.join(chapter_dir.to_s, page.to_s+".png"))
+    while File.exist?(File.join(chapter_dir.to_s, page.to_s+".png")) && !File.zero?(File.join(chapter_dir.to_s, page.to_s+".png"))
       page=page+1
     end
-    while open(("http://www.mangareader.net/"+series_name+HTTP_URL_SEPERATOR+local_start_chapter+HTTP_URL_SEPERATOR+page.to_s)) { |f|
-      p "hitting url:  "+"http://www.mangareader.net/"+series_name+HTTP_URL_SEPERATOR+local_start_chapter.to_s+HTTP_URL_SEPERATOR+page.to_s
+    while open(("http://www.mangapanda.com/"+series_name+HTTP_URL_SEPERATOR+local_start_chapter+HTTP_URL_SEPERATOR+page.to_s)) { |f|
+      p "hitting url:  "+"http://www.mangapanda.com/"+series_name+HTTP_URL_SEPERATOR+local_start_chapter.to_s+HTTP_URL_SEPERATOR+page.to_s
       f.each_line { |line|
         if url = line.to_s.match(/"http.*jpg"/).to_s.match(/http.*jpg/)
           file_to_write = File.join(chapter_dir.to_s, page.to_s+".png")
@@ -41,26 +43,35 @@ class MangaSync
     puts $!, $@
   end
 
+  def getThread(start_chapter, end_chapter, series_name)
+    Thread.new(series_name, start_chapter, end_chapter) { method(series_name, start_chapter, end_chapter) }
+  end
+
   def connect_to_method
     printf "input series name : "
     series_name = gets().chomp().downcase
     printf "input start chapter no : "
     start_chapter = gets().chomp.downcase
-    printf "input end chapter no : "
+    printf "input end chapter no(if you need only one chapter, the leave this blank or give same
+    value as start chapter) : "
     end_chapter = gets().chomp.downcase
-    start = start_chapter
 
+    if end_chapter == ""
+      end_chapter = start_chapter
+    end
+
+    start_chapter=(start_chapter.to_i-1).to_s
+
+    threads = []
     while start_chapter.to_i <= end_chapter.to_i
-      if start_chapter==start
-        t1 = Thread.new(series_name, start_chapter, end_chapter) { method(series_name, start_chapter, end_chapter) }
-      else
-        t1 = Thread.new(series_name, start_chapter, end_chapter) { method(series_name, (start_chapter.next!), end_chapter) }
+      for i in 1..5
+        threads << getThread(start_chapter.next!, end_chapter, series_name)
+        sleep(0.005)
       end
-      t2 = Thread.new(series_name, start_chapter, end_chapter) { method(series_name, (start_chapter.next!), end_chapter) }
-      t3 = Thread.new(series_name, start_chapter, end_chapter) { method(series_name, (start_chapter.next!), end_chapter) }
-      t1.join
-      t2.join
-      t3.join
+      for thread in threads
+        thread.join
+      end
+      threads.clear
     end
   end
 end
