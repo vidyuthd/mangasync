@@ -6,11 +6,12 @@ machine so that you can read them in your free time.
 ## Instructions on usage
 1. ```git clone https://github.com/vidyuthd/mangasync```
 2. ``` cd mangasync ```
-3. ``` ruby manga_sync.rb
-       input series name : one-piece
-       input start chapter no : 551
-       input end chapter no(if you need only one chapter, the leave this blank or give same
-           value as start chapter) : 551
+3. ``` ruby manga_sync.rb ```
+
+### Sample Output
+>       input series name : one-piece
+>       input start chapter no : 551
+>       input end chapter no(if you need only one chapter, the leave this blank or give same value as start chapter) : 551
        "hitting url:  http://www.mangareader.net/one-piece/551/1"
        "hitting url:  http://www.mangareader.net/one-piece/551/2"
        "hitting url:  http://www.mangareader.net/one-piece/551/3"
@@ -28,7 +29,6 @@ machine so that you can read them in your free time.
        "hitting url:  http://www.mangareader.net/one-piece/551/15"
        "hitting url:  http://www.mangareader.net/one-piece/551/16"
        "hitting url:  http://www.mangareader.net/one-piece/551/17"
-    ```
     
 ## Prerequisites 
        
