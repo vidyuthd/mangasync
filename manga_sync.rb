@@ -23,8 +23,8 @@ class MangaSync
     while File.exist?(File.join(chapter_dir.to_s, page.to_s+".png")) && !File.zero?(File.join(chapter_dir.to_s, page.to_s+".png"))
       page=page+1
     end
-    while open(("http://www.mangapanda.com/"+series_name+HTTP_URL_SEPERATOR+local_start_chapter+HTTP_URL_SEPERATOR+page.to_s)) { |f|
-      p "hitting url:  "+"http://www.mangapanda.com/"+series_name+HTTP_URL_SEPERATOR+local_start_chapter.to_s+HTTP_URL_SEPERATOR+page.to_s
+    while open(("http://www.mangareader.net/"+series_name+HTTP_URL_SEPERATOR+local_start_chapter+HTTP_URL_SEPERATOR+page.to_s)) { |f|
+      p "hitting url:  "+"http://www.mangareader.net/"+series_name+HTTP_URL_SEPERATOR+local_start_chapter.to_s+HTTP_URL_SEPERATOR+page.to_s
       f.each_line { |line|
         if url = line.to_s.match(/"http.*jpg"/).to_s.match(/http.*jpg/)
           file_to_write = File.join(chapter_dir.to_s, page.to_s+".png")
@@ -68,11 +68,11 @@ class MangaSync
         threads << getThread(start_chapter.next!, end_chapter, series_name)
         sleep(0.005)
       end
-      for thread in threads
-        thread.join
-      end
-      threads.clear
     end
+    for thread in threads
+      thread.join
+    end
+    threads.clear
   end
 end
 
