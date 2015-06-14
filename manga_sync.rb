@@ -90,6 +90,11 @@ class MangaSync
     arr = series_name.split(" ")
     if arr.length > 0
       multiword_seperator = sourcejson["multiword-seperator"]
+      if sourcejson["capitalize-series-name"] != nil && sourcejson["capitalize-series-name"]=="true"
+        arr.map! { |item|
+          item = item.capitalize
+        }
+      end
       series_name = arr.join(multiword_seperator)
     end
   else
@@ -134,7 +139,7 @@ class MangaSync
     printf "input end chapter no(if you need only one chapter, the leave this blank by pressing enter or give same
     value as start chapter) : "
     end_chapter = gets().chomp.downcase
-    printf "input manga source by number (this can be mangapanda,mangareader,mangafox,mangajoy -leave this blank
+    printf "input manga source by number (this can be mangapanda,mangareader,mangafox,mangajoy,mangasee -leave this blank
     if you are not sure by pressing enter button): "
     source = gets().chomp.downcase
     source = source!= "" ? source : "mangareader"
