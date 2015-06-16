@@ -1,5 +1,5 @@
 $mangasource='{
-"sources":["mangapanda","mangareader","mangafox","bato","mangajoy","mangasee","mangatown"],
+"sources":["mangapanda","mangareader","mangafox","bato","mangajoy","mangasee","mangatown","readmanga"],
 "source-details": {
 					 "mangapanda":{
 							"url":"http://mangapanda.com/",
@@ -71,6 +71,15 @@ $mangasource='{
 							"volume-determine-url":"http://mangafox.me/manga/<series_name>/",
               "image-matching-regex-string":"src=\"http.*\\.jpg?.*\"",
               "image-pattern":"jpg"
+					 },
+					 "readmanga":{
+							"url":"http://www.readmanga.today/",
+							"series-url":"http://www.readmanga.today/<series_name>/",
+							"chapter-url":"http://www.readmanga.today/<series_name>/<chapter_no>",
+							"page-url":"http://www.readmanga.today/<series_name>/<chapter_no>/<page_no>",
+							"multiword-seperator":"-",
+              "image-matching-regex-string":"<img.*src=\"http.*manga-joy.*[jpg|png]\"",
+              "image-pattern":"jpg,png"
 					 }
 			}
 }'
