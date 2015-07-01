@@ -139,7 +139,7 @@ class MangaSync
     printf "input end chapter no(if you need only one chapter, the leave this blank by pressing enter or give same
     value as start chapter) : "
     end_chapter = gets().chomp.downcase
-    printf "input manga source by number (this can either of be mangapanda,mangareader,mangafox,mangajoy,mangasee,mangatown,readmanga,mangafreak -leave this blank
+    printf "input manga source by number (this can either of be mangapanda,mangareader,mangafox,mangajoy,mangasee,mangatown,readmanga,mangafreak,mangahere -leave this blank
     if you are not sure by pressing enter button): "
     source = gets().chomp.downcase
     source = source!= "" ? source : "mangareader"
