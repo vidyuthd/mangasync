@@ -1,5 +1,5 @@
 $mangasource='{
-"sources":["mangapanda","mangareader","mangafox","bato","mangajoy","mangasee","mangatown","readmanga","mangafreak","mangahere"],
+"sources":["mangapanda","mangareader","mangafox","bato","mangajoy","mangasee","mangatown","readmanga","mangafreak","mangahere","mangahit"],
 "source-details": {
 					 "mangapanda":{
 							"url":"http://mangapanda.com/",
@@ -97,6 +97,15 @@ $mangasource='{
 							"page-url":"http://www.mangahere.co/manga/<series_name>/c<chapter_no>/<page_no>.html",
 							"multiword-seperator":"_",
               "image-matching-regex-string":"src=\"http.*jpg.*\"",
+              "image-pattern":"jpg"
+					 },
+					 "mangahit":{
+							"url":"http://www.mangahit.com/",
+							"series-url":"http://www.mangahit.commanga/<series_name>/",
+							"chapter-url":"http://www.mangahit.com/<series_name>/<chapter_no>",
+							"page-url":"http://www.mangahit.com/<series_name>/<chapter_no>/<page_no>",
+							"multiword-seperator":"-",
+              "image-matching-regex-string":"src=\"http.*jpg\"",
               "image-pattern":"jpg"
 					 }
 			}

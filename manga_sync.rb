@@ -19,9 +19,11 @@ class MangaSync
     series_name = preparenamebasedonsource(sourcejson, series_name)
 
     if (!Dir.exist?(series_dir))
+      puts "creating series directory #{series_dir}"
       Dir.mkdir(series_dir, 0755)
     end
     if (!Dir.exist?(chapter_dir))
+      puts "creating chapter directory #{chapter_dir}"
       Dir.mkdir(chapter_dir, 0755)
     end
     while File.exist?(File.join(chapter_dir.to_s, page.to_s+".png")) && !File.zero?(File.join(chapter_dir.to_s,
@@ -44,7 +46,8 @@ class MangaSync
       img_pattern += "]"
     end
 
-    secondary_regex= Regexp.new("http.*"+img_pattern)
+    p page_url.gsub('<series_name>', series_name).gsub('<chapter_no>', local_start_chapter).gsub('<volume>', volume).
+          gsub('<page_no>', page.to_s)
 
     while open(page_url.gsub('<series_name>', series_name).gsub('<chapter_no>', local_start_chapter).gsub('<volume>', volume).
                    gsub('<page_no>', page.to_s)) { |f|
@@ -139,7 +142,7 @@ class MangaSync
     printf "input end chapter no(if you need only one chapter, the leave this blank by pressing enter or give same
     value as start chapter) : "
     end_chapter = gets().chomp.downcase
-    printf "input manga source by number (this can either of be mangapanda,mangareader,mangafox,mangajoy,mangasee,mangatown,readmanga,mangafreak,mangahere -leave this blank
+    printf "input manga source by number (this can either of be mangapanda,mangareader,mangafox,mangajoy,mangasee,mangatown,readmanga,mangafreak,mangahere,mangahit -leave this blank
     if you are not sure by pressing enter button): "
     source = gets().chomp.downcase
     source = source!= "" ? source : "mangareader"
