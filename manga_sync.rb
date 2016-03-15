@@ -46,6 +46,7 @@ class MangaSync
       img_pattern += "]"
     end
 
+    secondary_regex= Regexp.new("http.*"+img_pattern)
     p page_url.gsub('<series_name>', series_name).gsub('<chapter_no>', local_start_chapter).gsub('<volume>', volume).
           gsub('<page_no>', page.to_s)
 
