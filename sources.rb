@@ -7,7 +7,7 @@ $mangasource='{
 							"chapter-url":"http://mangapanda.com/<series_name>/<chapter_no>",
 							"page-url":"http://mangapanda.com/<series_name>/<chapter_no>/<page_no>",
 							"multiword-seperator":"-",
-							"search-url":"http://www.mangareader.net/actions/search/?q=<search_query>",
+							"search-url":"http://www.mangapanda.com/actions/search/?q=<search_query>",
               "image-matching-regex-string":"width=.*src=\"http.*jpg\"",
               "image-pattern":"jpg"
 						},
@@ -17,7 +17,7 @@ $mangasource='{
 							"chapter-url":"http://mangareader.net/<series_name>/<chapter_no>",
 							"page-url":"http://mangareader.net/<series_name>/<chapter_no>/<page_no>",
 							"multiword-seperator":"-",
-							"search-url":"http://www.mangapanda.com/actions/search/?q=<search_query>",
+							"search-url":"http://www.mangareader.net/actions/search/?q=<search_query>",
               "image-matching-regex-string":"width=.*src=\"http.*jpg\"",
               "image-pattern":"jpg"
 						},
